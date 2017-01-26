@@ -70,6 +70,11 @@ function setContainerSamples(samples) {
   });
 }
 
+function updateTitle(title)
+{
+  $title.text(title);
+}
+
 // Randomized page title
 const boardNames = [
   'music',
@@ -109,6 +114,7 @@ const search = new Search({
 
   onSubmit: (e) => {
     sampleContainer.playRandomVisible(e.shiftKey, e.ctrlKey, true);
+    updateTitle(sampleContainer.getLastPlayed());
   },
 });
 
@@ -132,6 +138,7 @@ configPromise.then((config) => {
 
   $('[data-action="play-version-sample"]').on('click', () => {
     sampleContainer.playRandomWithId(config.versionSampleId);
+    updateTitle(sampleContainer.getLastPlayed());
   });
 
   // Version in settings modal

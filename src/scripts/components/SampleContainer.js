@@ -17,6 +17,9 @@ class SampleContainer {
   /** @type string */
   query = '';
 
+  /** @type string */
+  lastPlayed = 'None';
+
   constructor() {
     this.$sampleContainer = $('.sample-container');
     this.$empty = $('.sample-container__empty');
@@ -160,6 +163,7 @@ class SampleContainer {
     const $sample = $visibleSamples.eq(index);
 
     $sample.data('sample').play(spam, loop);
+    this.lastPlayed = $sample.name;
 
     if (scroll) {
       this.scrollToSample($sample);
@@ -184,6 +188,7 @@ class SampleContainer {
 
     // Play the sample
     $sample.data('sample').play(spam, loop);
+    this.lastPlayed = $sample.name;
 
     // Scroll
     if (scroll) {
@@ -199,6 +204,10 @@ class SampleContainer {
     $('html, body').animate({
       scrollTop: sampleTop - 100,
     });
+  }
+
+  getLastPlayed() {
+    return this.lastPlayed;
   }
 }
 
